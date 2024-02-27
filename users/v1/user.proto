@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+package users.v1;
+
+import "buf/validate/validate.proto";
+
+option go_package="github.com/anuj070894/go_microservices_new/gen/go/users/v1;userpb";
+
+message User {
+    option deprecated = true;
+    string uuid = 1;
+    string full_name = 2 [(buf.validate.field).string.min_len=1];
+    int64 birth_year = 3 [(buf.validate.field).int64.gt=1900];
+    optional uint32 salary = 4;
+    repeated Address addresses = 5;
+    MaritalStatus marital_status = 6;
+}
+
+message Address {
+    string street = 1;
+    string city = 2;
+}
+
+message School {
+    string name = 1;
+    int32 num_of_students = 2 [deprecated=true];
+}
+
+message Gender {
+    string g_type = 1;
+    reserved 2;
+}
+
+enum MaritalStatus {
+    MARITAL_STATUS_UNSPECIFIED = 0;
+    MARITAL_STATUS_SINGLE = 1;
+    MARITAL_STATUS_MARRIED = 2;
+}

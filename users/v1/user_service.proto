@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package users.v1;
+
+option go_package="github.com/anuj070894/go_microservices_new/gen/go/users/v1;userpb";
+
+import "users/v1/user.proto";
+
+service UserService {
+    rpc GetUser (GetUserRequest) returns (GetUserResponse) {};
+}
+
+message GetUserRequest {
+    string uuid = 1;
+}
+
+message GetUserResponse {
+    User user = 1;
+}
